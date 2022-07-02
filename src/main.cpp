@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
   UCI::init(Options);
   Tune::init();
   PSQT::init();
-  nnue.init("default.net");
+  nnue.init(Options["NNUEFile"]);
   Bitboards::init();
   Position::init();
   Bitbases::init();

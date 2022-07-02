@@ -42,6 +42,7 @@ void on_hash_size(const Option& o) { TT.resize(size_t(o)); }
 void on_logger(const Option& o) { start_logger(o); }
 void on_threads(const Option& o) { Threads.set(size_t(o)); }
 void on_tb_path(const Option& o) { Tablebases::init(o); }
+void on_nnue_file(const Option& o) { nnue.init(o); }
 
 
 /// Our case insensitive less() function as required by UCI protocol
@@ -80,6 +81,7 @@ void init(OptionsMap& o) {
   o["Syzygy50MoveRule"]      << Option(true);
   o["SyzygyProbeLimit"]      << Option(7, 0, 7);
   o["UseNNUE"]               << Option(true);
+  o["NNUEFile"]              << Option(NNUEFileDefaultName, on_nnue_file);
 }
 
 

@@ -25,7 +25,7 @@
 
 void NeuralNet::init(const char* filename) {
 
-  FILE* f = fopen(filename, "rb");
+  FILE* f = fopen(Options["NNUEFile"], "rb");
   if (f != NULL)
   {    
       fread(InputWeights  , sizeof(int16_t), INPUT_WEIGHTS * HIDDEN_WEIGHTS, f);
