@@ -31,7 +31,7 @@ constexpr int OUTPUT_BIAS    = 1;
 
 class NeuralNet {
 public:
-  void init(const char* filename);
+  void init(std::string str_filename);
   void init_accumulator(int16_t *accumulator, int size);
   void activate(int16_t *accumulator, int size, int inputSq);
   void deactivate(int16_t *accumulator, int size, int inputSq);

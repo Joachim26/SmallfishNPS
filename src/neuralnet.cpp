@@ -23,7 +23,9 @@
 #include "neuralnet.h"
 
 
-void NeuralNet::init(const char* filename) {
+void NeuralNet::init(std::string str_filename) {
+
+  const char* filename = str_filename.c_str();
 
   FILE* f = fopen(filename, "rb");
   if (f != NULL)
