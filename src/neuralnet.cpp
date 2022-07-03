@@ -46,18 +46,21 @@ void NeuralNet::init(std::string str_filename) {
 
 void NeuralNet::init_accumulator(int16_t *accumulator, int size) {
 
+  #pragma clang loop vectorize(enable)
   for (int i = 0; i < size; i++)
       accumulator[i] = HiddenBias[i];
 }
 
 void NeuralNet::activate(int16_t *accumulator, int size, int inputSq) {
 
+  #pragma clang loop vectorize(enable)
   for (int i = 0; i < size; i++)
       accumulator[i] += InputWeights[inputSq * HIDDEN_BIAS + i];
 }
 
 void NeuralNet::deactivate(int16_t *accumulator, int size, int inputSq) {
 
+  #pragma clang loop vectorize(enable)
   for (int i = 0; i < size; i++)
       accumulator[i] -= InputWeights[inputSq * HIDDEN_BIAS + i];
 }
@@ -70,6 +73,7 @@ int32_t NeuralNet::output(int16_t *accumulator, int size) {
 
   int32_t output = OutputBias[0];
 
+  #pragma clang loop vectorize(enable)
   for (int i = 0; i < size; i++)
       output += relu(accumulator[i]) * HiddenWeights[i];
 
