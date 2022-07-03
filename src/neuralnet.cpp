@@ -40,7 +40,7 @@ void NeuralNet::init(std::string str_filename) {
   else
   {
       std::cout << "Network file could not be loaded!" << std::endl;
-      std::exit(EXIT_FAILURE);
+      //std::exit(EXIT_FAILURE);
   }
 }
 
