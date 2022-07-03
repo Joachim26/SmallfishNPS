@@ -81,7 +81,7 @@ void init(OptionsMap& o) {
   o["Syzygy50MoveRule"]      << Option(true);
   o["SyzygyProbeLimit"]      << Option(7, 0, 7);
   o["UseNNUE"]               << Option(true);
-  o["NNUEFile"]              << Option(NNUEFileDefaultName, on_nnue_file);
+  o["NNUEFile"]              << Option("default.net", on_nnue_file);
 }
 
 
