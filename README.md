@@ -6,6 +6,8 @@
 [SmallfishNPS](https://github.com/Joachim26/Stockfish) is a modified Stockfish using the very small net from Smallbrain. With this net on Android nps and ELO are both higher than those of the classical SF.
 Many thanks to Disservin and joergoster!
 
+For human play SmallfishNPS has some additional uci-options, see [StockfishNPS](https://github.com/Joachim26/Stockfish).
+
 [Stockfish](https://stockfishchess.org) is a free, powerful UCI chess engine
 derived from Glaurung 2.1. Stockfish is not a complete chess program and requires a
 UCI-compatible graphical user interface (GUI) (e.g. XBoard with PolyGlot, Scid,
