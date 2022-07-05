@@ -836,7 +836,8 @@ namespace {
         Value v = pos.nnue_output();
         v = std::min(v, Value(30000));
 
-        // SmFnps Begin //
+        // SmFnps Begin
+        /*
         if((Options["Randomize Eval"]) || Options["Wait ms"])
         {
             // waitms millisecs
@@ -849,7 +850,8 @@ namespace {
             r = std::clamp<float>(r, VALUE_TB_LOSS_IN_MAX_PLY + 1, VALUE_TB_WIN_IN_MAX_PLY - 1);
             v = (int(Options["Randomize Eval"]) * Value(r) + (100 - int(Options["Randomize Eval"])) * v) / 100;
         }
-        // SmFnps End //
+        */
+        // SmFnps End 
 
         return (pos.side_to_move() == WHITE ? v : -v) + Tempo;
     }
