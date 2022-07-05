@@ -847,7 +847,7 @@ namespace {
             std::normal_distribution<float> d(0.0, PawnValueEg);
             float r = d(rng);
             r = std::clamp<float>(r, VALUE_TB_LOSS_IN_MAX_PLY + 1, VALUE_TB_WIN_IN_MAX_PLY - 1);
-            v = (Options["Randomize Eval"] * Value(r) + (100 - Options["Randomize Eval"]) * v) / 100;
+            v = (int(Options["Randomize Eval"]) * Value(r) + (100 - int(Options["Randomize Eval"])) * v) / 100;
         }
         // SmFnps End //
 
