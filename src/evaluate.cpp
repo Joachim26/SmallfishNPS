@@ -831,7 +831,7 @@ namespace {
 
     assert(!pos.checkers());
 
-    if (Options["UseNNUE"])
+    //if (Options["UseNNUE"])
     {
         Value v = pos.nnue_output();
         v = std::min(v, Value(30000));
