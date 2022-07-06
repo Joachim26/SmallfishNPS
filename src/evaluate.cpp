@@ -78,9 +78,7 @@ using namespace Trace;
 
 namespace {
 
-  // Threshold for lazy and space evaluation
-  constexpr Value LazyThreshold1  = Value(1400);
-  constexpr Value LazyThreshold2  = Value(1300);
+  // Threshold for space evaluation
   constexpr Value SpaceThreshold = Value(12222);
 
   // KingAttackWeights[PieceType] contains king attack weights by piece type
@@ -831,102 +829,10 @@ namespace {
 
     assert(!pos.checkers());
 
-    //if (Options["UseNNUE"])
-    {
-        Value v = pos.nnue_output();
-        v = std::min(v, Value(30000));
+    Value v = pos.nnue_output();
+    v = std::min(v, Value(30000));
 
-        // SmFnps Begin
-        /*
-        if((Options["Randomize Eval"]) || Options["Wait ms"])
-        {
-            // waitms millisecs
-            std::this_thread::sleep_for(std::chrono::milliseconds(Options["Wait ms"]));
-
-            // RandomEval
-            static thread_local std::mt19937_64 rng = [](){return std::mt19937_64(std::time(0));}();
-            std::normal_distribution<float> d(0.0, PawnValueEg);
-            float r = d(rng);
-            r = std::clamp<float>(r, VALUE_TB_LOSS_IN_MAX_PLY + 1, VALUE_TB_WIN_IN_MAX_PLY - 1);
-            v = (int(Options["Randomize Eval"]) * Value(r) + (100 - int(Options["Randomize Eval"])) * v) / 100;
-        }
-        */
-        // SmFnps End 
-
-        return (pos.side_to_move() == WHITE ? v : -v) + Tempo;
-    }
-
-    // Probe the material hash table
-    me = Material::probe(pos);
-
-    // If we have a specialized evaluation function for the current material
-    // configuration, call it and return.
-    if (me->specialized_eval_exists())
-        return me->evaluate(pos);
-
-    // Initialize score by reading the incrementally updated scores included in
-    // the position object (material + piece square tables) and the material
-    // imbalance. Score is computed internally from the white point of view.
-    Score score = pos.psq_score() + me->imbalance() + pos.this_thread()->contempt;
-
-    // Probe the pawn hash table
-    pe = Pawns::probe(pos);
-    score += pe->pawn_score(WHITE) - pe->pawn_score(BLACK);
-
-    // Early exit if score is high
-    auto lazy_skip = [&](Value lazyThreshold) {
-        return abs(mg_value(score) + eg_value(score)) / 2 > lazyThreshold + pos.non_pawn_material() / 64;
-    };
-
-    if (lazy_skip(LazyThreshold1))
-        goto make_v;
-
-    // Main evaluation begins here
-    initialize<WHITE>();
-    initialize<BLACK>();
-
-    // Pieces evaluated first (also populates attackedBy, attackedBy2).
-    // Note that the order of evaluation of the terms is left unspecified.
-    score +=  pieces<WHITE, KNIGHT>() - pieces<BLACK, KNIGHT>()
-            + pieces<WHITE, BISHOP>() - pieces<BLACK, BISHOP>()
-            + pieces<WHITE, ROOK  >() - pieces<BLACK, ROOK  >()
-            + pieces<WHITE, QUEEN >() - pieces<BLACK, QUEEN >();
-
-    score += mobility[WHITE] - mobility[BLACK];
-
-    // More complex interactions that require fully populated attack bitboards
-    score +=  king<   WHITE>() - king<   BLACK>()
-            + passed< WHITE>() - passed< BLACK>();
-
-    if (lazy_skip(LazyThreshold2))
-        goto make_v;
-
-    score +=  threats<WHITE>() - threats<BLACK>()
-            + space<  WHITE>() - space<  BLACK>();
-
-make_v:
-    // Derive single value from mg and eg parts of score
-    Value v = winnable(score);
-
-    // In case of tracing add all remaining individual evaluation terms
-    if (T)
-    {
-        Trace::add(MATERIAL, pos.psq_score());
-        Trace::add(IMBALANCE, me->imbalance());
-        Trace::add(PAWN, pe->pawn_score(WHITE), pe->pawn_score(BLACK));
-        Trace::add(MOBILITY, mobility[WHITE], mobility[BLACK]);
-    }
-
-    // Evaluation grain
-    v = (v / 16) * 16;
-
-    // Side to move point of view
-    v = (pos.side_to_move() == WHITE ? v : -v) + Tempo;
-
-    // Damp down the evaluation linearly when shuffling
-    v = v * (100 - pos.rule50_count()) / 100;
-
-    return v;
+    return (pos.side_to_move() == WHITE ? v : -v) + Tempo;
   }
 
 } // namespace
