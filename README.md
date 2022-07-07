@@ -3,8 +3,8 @@
 [![Build Status](https://github.com/official-stockfish/Stockfish/actions/workflows/stockfish.yml/badge.svg)](https://github.com/official-stockfish/Stockfish/actions)
 
 
-[SmallfishNPS](https://github.com/Joachim26/Stockfish) is a modified Stockfish using the very small net from Smallbrain. With this net on Android nps and ELO are both higher than those of the classical SF.
-Many thanks to Disservin and joergoster!
+[SmallfishNPS](https://github.com/Joachim26/Stockfish) is a modified Stockfish using the very small net from Smallbrain. Many thanks to Disservin and joergoster! With this net on Android nps and ELO are both higher than those of the classical SF. First tests with a speed optimized version of SmallfishNPS showed that it is on par or even stronger than Stockfish12 with its 50 times larger 20MB nnue-net!
+
 
 For human play SmallfishNPS has some additional uci-options, see [StockfishNPS](https://github.com/Joachim26/Stockfish).
 
