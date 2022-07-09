@@ -3,10 +3,10 @@
 [![Build Status](https://github.com/official-stockfish/Stockfish/actions/workflows/stockfish.yml/badge.svg)](https://github.com/official-stockfish/Stockfish/actions)
 
 
-[SmallfishNPS](https://github.com/Joachim26/Stockfish) is a modified Stockfish using the very small net from Smallbrain. Many thanks to Disservin and joergoster! With this net on Android nps and ELO are both higher than those of the classical SF. First tests with a speed optimized version of SmallfishNPS showed that it is on par or even stronger than Stockfish12 with its 50 times larger 20MB nnue-net!
+[SmallfishNPS](https://github.com/Joachim26/SmallfishNPS) is a modified Stockfish using the very small net from Smallbrain. Credits to Disservin, the author of Smallbrain, and to joergoster, who adapted the net to the last classical SF. With this net on Android nps and ELO are both higher than those of the classical SF.
 
-
-For human play SmallfishNPS has some additional uci-options, see [StockfishNPS](https://github.com/Joachim26/Stockfish).
+For human play [SmallfishNPS](https://github.com/Joachim26/SmallfishNPS) has some additional uci-options, see [StockfishNPS](https://github.com/Joachim26/Stockfish). [SmallfishGTX](https://github.com/Joachim26/SmallfishNPS/tree/FullSpeed) is an optimized version without additional uci-options but significantly faster and stronger.
+Tests on an older armv8-tablet showed that for short TCs it is stronger than Stockfish12 with its 50 times larger 20MB nnue-net, while for longer TCs Stockfish12 is the stronger engine.
 
 [Stockfish](https://stockfishchess.org) is a free, powerful UCI chess engine
 derived from Glaurung 2.1. Stockfish is not a complete chess program and requires a
