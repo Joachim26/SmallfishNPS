@@ -831,28 +831,12 @@ namespace {
 
     assert(!pos.checkers());
 
-    if (Options["UseNNUE"])
+    //if (Options["UseNNUE"])
+    
+    Value v = eg_value(pos.psq_score());
+    if (abs(v) < Value(500))
     {
-        Value v = pos.nnue_output();
-        v = std::min(v, Value(30000));
-
-        // SmFnps Begin
-        
-        if((Options["Randomize Eval"]) || Options["Wait ms"])
-        {
-            // waitms millisecs
-            std::this_thread::sleep_for(std::chrono::milliseconds(Options["Wait ms"]));
-
-            // RandomEval
-            static thread_local std::mt19937_64 rng = [](){return std::mt19937_64(std::time(0));}();
-            std::normal_distribution<float> d(0.0, PawnValueEg);
-            float r = d(rng);
-            r = std::clamp<float>(r, VALUE_TB_LOSS_IN_MAX_PLY + 1, VALUE_TB_WIN_IN_MAX_PLY - 1);
-            v = (int(Options["Randomize Eval"]) * Value(r) + (100 - int(Options["Randomize Eval"])) * v) / 100;
-        }
-        
-        // SmFnps End 
-
+        v = pos.nnue_output();
         return (pos.side_to_move() == WHITE ? v : -v) + Tempo;
     }
 
@@ -906,7 +890,7 @@ namespace {
 
 make_v:
     // Derive single value from mg and eg parts of score
-    Value v = winnable(score);
+    v = winnable(score);
 
     // In case of tracing add all remaining individual evaluation terms
     if (T)
