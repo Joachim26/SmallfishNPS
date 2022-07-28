@@ -837,7 +837,7 @@ namespace {
         if (abs(v) < Value(500))
         {
            v = pos.nnue_output();
-           return (pos.side_to_move() == WHITE ? v
+           return (pos.side_to_move() == WHITE ? v : -v) + Tempo;
         }
     }
 
