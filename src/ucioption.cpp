@@ -63,10 +63,10 @@ void init(OptionsMap& o) {
   o["Contempt"]              << Option(24, -100, 100);
   o["Analysis Contempt"]     << Option("Both var Off var White var Black var Both", "Both");
   o["Threads"]               << Option(1, 1, 512, on_threads);
-  o["Wait ms"]               << Option(0, 0, 100);
-  o["Randomize Eval"]        << Option(0, 0, 100);
-  o["Search_Nodes"]          << Option(0, 0, 100000);
-  o["Search_Depth"]          << Option(0, 0, 15);
+  //o["Wait ms"]               << Option(0, 0, 100);
+  //o["Randomize Eval"]        << Option(0, 0, 100);
+  //o["Search_Nodes"]          << Option(0, 0, 100000);
+  //o["Search_Depth"]          << Option(0, 0, 15);
   o["Hash"]                  << Option(16, 1, MaxHashMB, on_hash_size);
   o["Clear Hash"]            << Option(on_clear_hash);
   o["Ponder"]                << Option(false);

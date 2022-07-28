@@ -228,13 +228,13 @@ void MainThread::search() {
   TT.new_search();
 
 //SmFiNPS Begin
-
+/*
   if (Options["Search_Nodes"])
       Limits.nodes = int(Options["Search_Nodes"]);
 
   if (Options["Search_Depth"])
       Limits.depth = int(Options["Search_Depth"]);
-
+*/
 //SmFiNPS End
 
   if (rootMoves.empty())
