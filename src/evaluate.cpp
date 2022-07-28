@@ -890,7 +890,7 @@ namespace {
 
 make_v:
     // Derive single value from mg and eg parts of score
-    Value v = winnable(score);
+    v = winnable(score);
 
     // In case of tracing add all remaining individual evaluation terms
     if (T)
