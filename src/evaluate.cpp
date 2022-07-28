@@ -831,14 +831,13 @@ namespace {
 
     assert(!pos.checkers());
 
-    if (Options["UseNNUE"])
+    //if (Options["UseNNUE"])
+    
+    Value v = eg_value(pos.psq_score());
+    if (abs(v) < Value(500))
     {
-        Value v = eg_value(pos.psq_score());
-        if (abs(v) < Value(500))
-        {
-           v = pos.nnue_output();
-           return (pos.side_to_move() == WHITE ? v : -v) + Tempo;
-        }
+        v = pos.nnue_output();
+        return (pos.side_to_move() == WHITE ? v : -v) + Tempo;
     }
 
     // Probe the material hash table
