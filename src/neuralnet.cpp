@@ -77,5 +77,5 @@ int32_t NeuralNet::output(int16_t *accumulator, int size) {
   for (int i = 0; i < size; i++)
       output += relu(accumulator[i]) * HiddenWeights[i];
 
-  return output / (28 * 256);
+  return output / (64 * 256);
 }
